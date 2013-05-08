@@ -1,7 +1,7 @@
 circuit-simulator
 =================
 
-This is a version of Paul Falstad's circuit simulator(available at <http://www.falstad.com/circuit/>) with the following improvements:
+This is a version of Paul Falstad's circuit simulator (original available at <http://www.falstad.com/circuit/>) with the following improvements:
 
 * fixed import/export when running as an applet
 * it is now possible to save/load to/from a file when running as an application
