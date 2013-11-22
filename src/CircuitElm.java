@@ -209,6 +209,30 @@ public abstract class CircuitElm implements Editable {
 	poly.addPoint(p2.x, p2.y);
 	return poly;
     }
+
+    Polygon calcArrowReverse(Point a, Point b, double al, double aw) {
+    	Polygon poly = new Polygon();
+	Point p1 = new Point();
+	Point p2 = new Point();
+	double adx = b.x-a.x;
+	double ady = b.y-a.y;
+	double l = Math.sqrt(adx*adx+ady*ady);
+	if (l > 0)
+	{
+	    adx /= l;
+	    ady /= l;
+	    double bdx = -ady; // orthogonal unit vector
+	    double bdy = adx;  //
+	    poly.addPoint((int)Math.round(b.x+1 - adx*al),
+	                  (int)Math.round(b.y+1 - ady*al));
+	    poly.addPoint((int)Math.round(b.x+1 - bdx*al),
+	                  (int)Math.round(b.y+1 - bdy*aw));
+	    poly.addPoint((int)Math.round(b.x+1 + bdx*al),
+	                  (int)Math.round(b.y+1 + bdy*aw));
+	}
+	return poly;
+    }
+
     Polygon createPolygon(Point a, Point b, Point c) {
 	Polygon p = new Polygon();
 	p.addPoint(a.x, a.y);

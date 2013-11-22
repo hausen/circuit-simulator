@@ -5,6 +5,7 @@ import java.util.StringTokenizer;
 	final int FLAG_TERNARY = 1;
 	final int FLAG_NUMERIC = 2;
 	double hiV, loV;
+	Polygon arrowPoly;
 	public LogicInputElm(int xx, int yy) {
 	    super(xx, yy, false);
 	    hiV = 5;
@@ -34,6 +35,7 @@ import java.util.StringTokenizer;
 	void setPoints() {
 	    super.setPoints();
 	    lead1 = interpPoint(point1, point2, 1-12/dn);
+	    arrowPoly = calcArrowReverse(point1, lead1, 8, 8);
 	}
 	void draw(Graphics g) {
 	    Font f = new Font("SansSerif", Font.BOLD, 20);
@@ -46,6 +48,7 @@ import java.util.StringTokenizer;
 	    drawCenteredText(g, s, x2, y2, true);
 	    setVoltageColor(g, volts[0]);
 	    drawThickLine(g, point1, lead1);
+	    g.fillPolygon(arrowPoly);
 	    updateDotCount();
 	    drawDots(g, point1, lead1, curcount);
 	    drawPosts(g);

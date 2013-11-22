@@ -7,6 +7,7 @@ import java.util.StringTokenizer;
 	final int FLAG_PULLDOWN = 4;
 	double threshold;
 	String value;
+	Polygon arrowPoly;
 	public LogicOutputElm(int xx, int yy) {
 	    super(xx, yy);
 	    threshold = 3; // hausen: default to 3
@@ -33,6 +34,7 @@ import java.util.StringTokenizer;
 	void setPoints() {
 	    super.setPoints();
 	    lead1 = interpPoint(point1, point2, 1-12/dn);
+	    arrowPoly = calcArrow(point1, lead1, 8, 8);
 	}
 	void draw(Graphics g) {
 	    Font f = new Font("SansSerif", Font.BOLD, 20);
@@ -54,6 +56,7 @@ import java.util.StringTokenizer;
 	    drawCenteredText(g, s, x2, y2, true);
 	    setVoltageColor(g, volts[0]);
 	    drawThickLine(g, point1, lead1);
+	    g.fillPolygon(arrowPoly);
 	    drawPosts(g);
 	}
 	void stamp() {
