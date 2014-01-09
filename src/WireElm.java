@@ -3,11 +3,12 @@ import java.util.StringTokenizer;
 
     class WireElm extends ResistorElm {
 	public static boolean ideal = false;
-	public WireElm(int xx, int yy) { super(xx, yy); resistance = 0.001; }
+	private static final double defaultResistance = 1E-12;
+	public WireElm(int xx, int yy) { super(xx, yy); resistance = defaultResistance; }
 	public WireElm(int xa, int ya, int xb, int yb, int f,
 		    StringTokenizer st) {
-	    super(xa, ya, xb, yb, f, new StringTokenizer("0.001"));
-	    resistance = 0.001;
+	    super(xa, ya, xb, yb, f, new StringTokenizer("0.0"));
+	    resistance = defaultResistance;
 	}
 	static final int FLAG_SHOWCURRENT = 1;
 	static final int FLAG_SHOWVOLTAGE = 2;
