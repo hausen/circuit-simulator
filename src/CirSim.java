@@ -57,6 +57,7 @@ public class CirSim extends Frame
     CheckboxMenuItem euroResistorCheckItem;
     CheckboxMenuItem printableCheckItem;
     CheckboxMenuItem conventionCheckItem;
+    CheckboxMenuItem idealWireCheckItem;
     Scrollbar speedBar;
     Scrollbar currentBar;
     Label powerLabel;
@@ -161,7 +162,7 @@ public class CirSim extends Frame
     Circuit applet;
 
     CirSim(Circuit a) {
-	super("Circuit Simulator v1.5.1n");
+	super("Circuit Simulator v1.6.1a");
 	applet = a;
 	useFrame = false;
     }
@@ -314,6 +315,22 @@ public class CirSim extends Frame
 	printableCheckItem.setState(printable);
 	m.add(conventionCheckItem = getCheckItem("Conventional Current Motion"));
 	conventionCheckItem.setState(convention);
+	m.add(idealWireCheckItem = getCheckItem("Ideal Wires"));
+	idealWireCheckItem.setState(WireElm.ideal);
+	idealWireCheckItem.addItemListener(
+		new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					WireElm.ideal = true;
+				} else {
+					WireElm.ideal = false;
+				}
+				System.err.println("ideal wires: " + WireElm.ideal);
+			}
+		}
+	);
+
 	m.add(optionsItem = getMenuItem("Other Options..."));
 	
 	Menu circuitsMenu = new Menu("Circuits");
