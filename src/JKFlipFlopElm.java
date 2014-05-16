@@ -3,7 +3,7 @@ import java.util.StringTokenizer;
 
     class JKFlipFlopElm extends ChipElm {
     	final int FLAG_RESET = 2;
-    	boolean hasReset(){return flags & FLAG_RESET)!= 0;}
+    	boolean hasReset(){return (flags & FLAG_RESET)!= 0;}
 	public JKFlipFlopElm(int xx, int yy) { super(xx, yy); }
 	public JKFlipFlopElm(int xa, int ya, int xb, int yb, int f,
 			    StringTokenizer st) {
