@@ -7,7 +7,11 @@ class ImportExportAppletDialog
 extends Dialog
 implements ImportExportDialog
 {
-    Action type;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7610750057068682518L;
+	Action type;
     CirSim cframe;
     String circuitDump;
 

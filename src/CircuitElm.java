@@ -25,7 +25,7 @@ public abstract class CircuitElm implements Editable {
     boolean noDiagonal;
     public boolean selected;
     int getDumpType() { return 0; }
-    Class getDumpClass() { return getClass(); }
+    Class<? extends CircuitElm> getDumpClass() { return getClass(); }
     int getDefaultFlags() { return 0; }
 
     static void initClass(CirSim s) {
@@ -270,7 +270,7 @@ public abstract class CircuitElm implements Editable {
     }
     void move(int dx, int dy) {
 	x += dx; y += dy; x2 += dx; y2 += dy;
-	boundingBox.move(dx, dy);
+	boundingBox.setLocation(dx, dy);
 	setPoints();
     }
 

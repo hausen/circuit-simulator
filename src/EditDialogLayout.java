@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.event.*;
 
 class EditDialogLayout implements LayoutManager {
     public EditDialogLayout() {}
@@ -12,9 +11,9 @@ class EditDialogLayout implements LayoutManager {
 	return new Dimension(100,100);
     }
     public void layoutContainer(Container target) {
-	Insets insets = target.insets();
-	int targetw = target.size().width - insets.left - insets.right;
-	int targeth = target.size().height - (insets.top+insets.bottom);
+	Insets insets = target.getInsets();
+	int targetw = target.getSize().width - insets.left - insets.right;
+	int targeth = target.getSize().height - (insets.top+insets.bottom);
 	int i;
 	int h = insets.top;
 	int pw = 300;
@@ -46,8 +45,8 @@ class EditDialogLayout implements LayoutManager {
 		    if (i != target.getComponentCount()-1)
 			newline = false;
 		}
-		m.move(insets.left+x, h);
-		m.resize(d.width, d.height);
+		m.setLocation(insets.left+x, h);
+		m.setSize(d.width, d.height);
 		if (newline) {
 		    h += d.height;
 		    x = 0;
@@ -55,8 +54,8 @@ class EditDialogLayout implements LayoutManager {
 		    x += d.width;
 	    }
 	}
-	if (target.size().height < h)
-	    target.resize(pw + insets.right, h + insets.bottom);
+	if (target.getSize().height < h)
+	    target.setSize(pw + insets.right, h + insets.bottom);
     }
 };
 

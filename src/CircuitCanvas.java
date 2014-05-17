@@ -1,7 +1,11 @@
 import java.awt.*;
 
 class CircuitCanvas extends Canvas {
-    CirSim pg;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7801724829059357025L;
+	CirSim pg;
     CircuitCanvas(CirSim p) {
 	pg = p;
     }

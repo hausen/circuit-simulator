@@ -185,7 +185,7 @@ class TransLineElm extends CircuitElm {
     }
     void getInfo(String arr[]) {
 	arr[0] = "transmission line";
-	arr[1] = getUnitText(imped, sim.ohmString);
+	arr[1] = getUnitText(imped, CirSim.ohmString);
 	arr[2] = "length = " + getUnitText(2.9979e8*delay, "m");
 	arr[3] = "delay = " + getUnitText(delay, "s");
     }

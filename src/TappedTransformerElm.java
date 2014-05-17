@@ -12,6 +12,9 @@ import java.util.StringTokenizer;
 	    noDiagonal = true;
 	    current  = new double[4];
 	    curcount = new double[4];
+	    voltdiff = new double[3];
+	    curSourceValue = new double[3];
+	    a = new double[9];
 	}
 	public TappedTransformerElm(int xa, int ya, int xb, int yb, int f,
 			      StringTokenizer st) {
@@ -25,7 +28,10 @@ import java.util.StringTokenizer;
 	    try {
 		current[2] = new Double(st.nextToken()).doubleValue();
 	    } catch (Exception e) { }
+	    voltdiff = new double[3];
+	    curSourceValue = new double[3];
 	    noDiagonal = true;
+	    a = new double[9];
 	}
 	int getDumpType() { return 169; }
 	String dump() {
@@ -136,7 +142,6 @@ import java.util.StringTokenizer;
 	    // is equal to self-inductance of either half (slightly less
 	    // because the coupling is not perfect)
 	    //double m2 = .999*l2;
-	    a = new double[9];
 	    // load pre-inverted matrix
 	    a[0] = (1+cc)/(l1*(1+cc-2*cc*cc));
 	    a[1] = a[2] = a[3] = a[6] = 2*cc/((2*cc*cc-cc-1)*inductance*ratio);
@@ -159,8 +164,6 @@ import java.util.StringTokenizer;
 
 	    for (i = 0; i != 5; i++)
 		sim.stampRightSide(nodes[i]);
-	    voltdiff = new double[3];
-	    curSourceValue = new double[3];
 	}
 	void startIteration() {
 	    voltdiff[0] = volts[0]-volts[1];

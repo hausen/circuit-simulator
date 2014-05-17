@@ -30,10 +30,10 @@ class ThermistorElm extends CircuitElm {
     }
     Point ps3, ps4;
     void createSlider() {
-	sim.main.add(label = new Label("Temperature", Label.CENTER));
+	CirSim.main.add(label = new Label("Temperature", Label.CENTER));
 	int value = 50;
-	sim.main.add(slider = new Scrollbar(Scrollbar.HORIZONTAL, value, 1, 0, 101));
-	sim.main.validate();
+	CirSim.main.add(slider = new Scrollbar(Scrollbar.HORIZONTAL, value, 1, 0, 101));
+	CirSim.main.validate();
     }
     void setPoints() {
 	super.setPoints();
@@ -42,8 +42,8 @@ class ThermistorElm extends CircuitElm {
 	ps4 = new Point();
     }
     void delete() {
-	sim.main.remove(label);
-	sim.main.remove(slider);
+	CirSim.main.remove(label);
+	CirSim.main.remove(slider);
     }
     
     void draw(Graphics g) {
@@ -79,9 +79,9 @@ class ThermistorElm extends CircuitElm {
 	// FIXME
 	arr[0] = "spark gap";
 	getBasicInfo(arr);
-	arr[3] = "R = " + getUnitText(resistance, sim.ohmString);
-	arr[4] = "Ron = " + getUnitText(minresistance, sim.ohmString);
-	arr[5] = "Roff = " + getUnitText(maxresistance, sim.ohmString);
+	arr[3] = "R = " + getUnitText(resistance, CirSim.ohmString);
+	arr[4] = "Ron = " + getUnitText(minresistance, CirSim.ohmString);
+	arr[5] = "Roff = " + getUnitText(maxresistance, CirSim.ohmString);
     }
     public EditInfo getEditInfo(int n) {
 	// ohmString doesn't work here on linux

@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.util.StringTokenizer;
 
     class CounterElm extends ChipElm {

@@ -1,10 +1,11 @@
 import java.awt.*;
-import java.awt.event.*;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+
+//import java.awt.event.*;
 
 class ImportExportFileDialog
 implements ImportExportDialog
