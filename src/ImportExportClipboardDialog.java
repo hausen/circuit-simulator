@@ -53,7 +53,6 @@ class ImportExportClipboardDialog extends Dialog implements ImportExportDialog,
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		int i;
 		Object src = e.getSource();
 		if (src == importButton) {
 			if (clipboard == null)

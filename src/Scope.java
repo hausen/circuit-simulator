@@ -276,7 +276,7 @@ class Scope {
 	    gridStep *= 10;
 	double tstart = sim.t-sim.timeStep*speed*rect.width;
 	double tx = sim.t-(sim.t % gridStep);
-	int first = 1;
+	//int first = 1; 	#unused
 	for (ll = 0; ; ll++) {
 	    double tl = tx-gridStep*ll;
 	    int gx = (int) ((tl-tstart)/ts);
@@ -287,7 +287,7 @@ class Scope {
 	    if (tl < 0)
 		continue;
 	    col = 0xFF202020;
-	    first = 0;
+	    //first = 0;	#unused
 	    if (((tl+gridStep/4) % (gridStep*10)) < gridStep) {
 		col = 0xFF909090;
 		if (((tl+gridStep/4) % (gridStep*100)) < gridStep)
@@ -571,10 +571,10 @@ class Scope {
 		   DataBufferInt dbi = (DataBufferInt) db;
 		   pixels = dbi.getData();
 		*/
-		Class biclass = Class.forName("java.awt.image.BufferedImage");
-		Class dbiclass = Class.forName("java.awt.image.DataBufferInt");
-		Class rasclass = Class.forName("java.awt.image.Raster");
-		Constructor cstr = biclass.getConstructor(
+		Class<?> biclass = Class.forName("java.awt.image.BufferedImage");
+		Class<?> dbiclass = Class.forName("java.awt.image.DataBufferInt");
+		Class<?> rasclass = Class.forName("java.awt.image.Raster");
+		Constructor<?> cstr = biclass.getConstructor(
 		    new Class[] { int.class, int.class, int.class });
 		image = (Image) cstr.newInstance(new Object[] {
 						     new Integer(w), new Integer(h),

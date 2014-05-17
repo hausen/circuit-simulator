@@ -34,7 +34,6 @@ class ImportDialog extends Dialog implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-	int i;
 	Object src = e.getSource();
 	if (src == importButton) {
 	    cframe.readSetup(text.getText());

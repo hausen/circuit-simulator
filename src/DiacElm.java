@@ -41,9 +41,9 @@ class DiacElm extends CircuitElm {
     
     void draw(Graphics g) {
 	// FIXME need to draw Diac
-	int i;
-	double v1 = volts[0];
-	double v2 = volts[1];
+	//int i;	#unused
+	//double v1 = volts[0];
+	//double v2 = volts[1];
 	setBbox(point1, point2, 6);
 	draw2Leads(g);
 	setPowerColor(g, true);

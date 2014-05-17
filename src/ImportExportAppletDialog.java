@@ -1,7 +1,10 @@
 import java.awt.Dialog;
-import java.applet.Applet;
-import java.awt.Frame;
 import netscape.javascript.*; // add plugin.jar to classpath during compilation
+
+/*
+import java.applet.Applet;	#unused imports
+import java.awt.Frame;
+*/
 
 class ImportExportAppletDialog
 extends Dialog
