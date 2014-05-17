@@ -24,6 +24,7 @@ import java.lang.reflect.Constructor;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
+<<<<<<< HEAD
 public class CirSim extends Frame implements ComponentListener, ActionListener,
 		AdjustmentListener, MouseMotionListener, MouseListener, ItemListener,
 		KeyListener {
@@ -188,6 +189,172 @@ public class CirSim extends Frame implements ComponentListener, ActionListener,
 
 		CircuitElm.initClass(this);
 
+=======
+public class CirSim extends Frame
+  implements ComponentListener, ActionListener, AdjustmentListener,
+  MouseMotionListener, MouseListener, ItemListener, KeyListener {
+    
+    Thread engine = null;
+
+    Dimension winSize;
+    Image dbimage;
+    
+    Random random;
+    public static final int sourceRadius = 7;
+    public static final double freqMult = 3.14159265*2*4;
+    
+    public String getAppletInfo() {
+	return "Circuit by Paul Falstad";
+    }
+
+    static Container main;
+    Label titleLabel;
+    Button resetButton;
+    Button dumpMatrixButton;
+    MenuItem exportItem, exportLinkItem, importItem, exitItem, undoItem, redoItem,
+	cutItem, copyItem, pasteItem, selectAllItem, optionsItem;
+    Menu optionsMenu;
+    Checkbox stoppedCheck;
+    CheckboxMenuItem dotsCheckItem;
+    CheckboxMenuItem voltsCheckItem;
+    CheckboxMenuItem powerCheckItem;
+    CheckboxMenuItem smallGridCheckItem;
+    CheckboxMenuItem showValuesCheckItem;
+    CheckboxMenuItem conductanceCheckItem;
+    CheckboxMenuItem euroResistorCheckItem;
+    CheckboxMenuItem printableCheckItem;
+    CheckboxMenuItem conventionCheckItem;
+    CheckboxMenuItem idealWireCheckItem;
+    Scrollbar speedBar;
+    Scrollbar currentBar;
+    Label powerLabel;
+    Scrollbar powerBar;
+    PopupMenu elmMenu;
+    MenuItem elmEditMenuItem;
+    MenuItem elmCutMenuItem;
+    MenuItem elmCopyMenuItem;
+    MenuItem elmDeleteMenuItem;
+    MenuItem elmScopeMenuItem;
+    PopupMenu scopeMenu;
+    PopupMenu transScopeMenu;
+    PopupMenu mainMenu;
+    CheckboxMenuItem scopeVMenuItem;
+    CheckboxMenuItem scopeIMenuItem;
+    CheckboxMenuItem scopeMaxMenuItem;
+    CheckboxMenuItem scopeMinMenuItem;
+    CheckboxMenuItem scopeFreqMenuItem;
+    CheckboxMenuItem scopePowerMenuItem;
+    CheckboxMenuItem scopeIbMenuItem;
+    CheckboxMenuItem scopeIcMenuItem;
+    CheckboxMenuItem scopeIeMenuItem;
+    CheckboxMenuItem scopeVbeMenuItem;
+    CheckboxMenuItem scopeVbcMenuItem;
+    CheckboxMenuItem scopeVceMenuItem;
+    CheckboxMenuItem scopeVIMenuItem;
+    CheckboxMenuItem scopeXYMenuItem;
+    CheckboxMenuItem scopeResistMenuItem;
+    CheckboxMenuItem scopeVceIcMenuItem;
+    MenuItem scopeSelectYMenuItem;
+    Class addingClass;
+    int mouseMode = MODE_SELECT;
+    int tempMouseMode = MODE_SELECT;
+    String mouseModeStr = "Select";
+    static final double pi = 3.14159265358979323846;
+    static final int MODE_ADD_ELM = 0;
+    static final int MODE_DRAG_ALL = 1;
+    static final int MODE_DRAG_ROW = 2;
+    static final int MODE_DRAG_COLUMN = 3;
+    static final int MODE_DRAG_SELECTED = 4;
+    static final int MODE_DRAG_POST = 5;
+    static final int MODE_SELECT = 6;
+    static final int infoWidth = 120;
+    int dragX, dragY, initDragX, initDragY;
+    int selectedSource;
+    Rectangle selectedArea;
+    int gridSize, gridMask, gridRound;
+    boolean dragging;
+    boolean analyzeFlag;
+    boolean dumpMatrix;
+    boolean useBufferedImage;
+    boolean isMac;
+    String ctrlMetaKey;
+    double t;
+    int pause = 10;
+    int scopeSelected = -1;
+    int menuScope = -1;
+    int hintType = -1, hintItem1, hintItem2;
+    String stopMessage;
+    double timeStep;
+    static final int HINT_LC = 1;
+    static final int HINT_RC = 2;
+    static final int HINT_3DB_C = 3;
+    static final int HINT_TWINT = 4;
+    static final int HINT_3DB_L = 5;
+    Vector<CircuitElm> elmList;
+//    Vector setupList;
+    CircuitElm dragElm, menuElm, mouseElm, stopElm;
+    boolean didSwitch = false;
+    int mousePost = -1;
+    CircuitElm plotXElm, plotYElm;
+    int draggingPost;
+    SwitchElm heldSwitchElm;
+    double circuitMatrix[][], circuitRightSide[],
+	origRightSide[], origMatrix[][];
+    RowInfo circuitRowInfo[];
+    int circuitPermute[];
+    boolean circuitNonLinear;
+    int voltageSourceCount;
+    int circuitMatrixSize, circuitMatrixFullSize;
+    boolean circuitNeedsMap;
+    public boolean useFrame;
+    int scopeCount;
+    Scope scopes[];
+    int scopeColCount[];
+    static EditDialog editDialog;
+    static ImportExportDialog impDialog, expDialog;
+    Class dumpTypes[], shortcuts[];
+    static String muString = "u";
+    static String ohmString = "ohm";
+    String clipboard;
+    Rectangle circuitArea;
+    int circuitBottom;
+    Vector<String> undoStack, redoStack;
+
+    int getrand(int x) {
+	int q = random.nextInt();
+	if (q < 0) q = -q;
+	return q % x;
+    }
+    CircuitCanvas cv;
+    Circuit applet;
+
+    CirSim(Circuit a) {
+	super("Circuit Simulator v1.6.1a");
+	applet = a;
+	useFrame = false;
+    }
+
+    String startCircuit = null;
+    String startLabel = null;
+    String startCircuitText = null;
+    String baseURL = "http://www.falstad.com/circuit/";
+    
+    public void init() {
+	String euroResistor = null;
+	String useFrameStr = null;
+	boolean printable = true; // hausen: changed from false to true
+	boolean convention = true;
+
+	CircuitElm.initClass(this);
+
+	try {
+	    baseURL = applet.getDocumentBase().getFile();
+	    // look for circuit embedded in URL
+	    String doc = applet.getDocumentBase().toString();
+	    int in = doc.indexOf('#');
+	    if (in > 0) {
+		String x = null;
+>>>>>>> 6d38bc2409a5e0add33b65a08d0f44e3f50cc75e
 		try {
 			baseURL = applet.getDocumentBase().getFile();
 			// look for circuit embedded in URL
@@ -2282,6 +2449,7 @@ public class CirSim extends Frame implements ComponentListener, ActionListener,
 				p += l;
 			}
 		} catch (Exception e) {
+<<<<<<< HEAD
 			e.printStackTrace();
 			stop("Can't read setuplist.txt!", null);
 		}
@@ -2312,6 +2480,372 @@ public class CirSim extends Frame implements ComponentListener, ActionListener,
 			} catch (Exception e) {
 				e.printStackTrace();
 				stop("Unable to read " + str + "!", null);
+=======
+		    System.out.println("can't decode " + x);
+		    e.printStackTrace();
+		}
+	    }
+	    in = doc.lastIndexOf('/');
+	    if (in > 0)
+		baseURL = doc.substring(0, in+1);
+	    
+	    String param = applet.getParameter("PAUSE");
+	    if (param != null)
+		pause = Integer.parseInt(param);
+	    startCircuit = applet.getParameter("startCircuit");
+	    startLabel   = applet.getParameter("startLabel");
+	    euroResistor = applet.getParameter("euroResistors");
+	    useFrameStr  = applet.getParameter("useFrame");
+	    String x = applet.getParameter("whiteBackground");
+	    if (x != null && x.equalsIgnoreCase("true"))
+		printable = true;
+	    x = applet.getParameter("conventionalCurrent");
+	    if (x != null && x.equalsIgnoreCase("true"))
+		convention = false;
+	} catch (Exception e) { }
+	
+	boolean euro = (euroResistor != null && euroResistor.equalsIgnoreCase("true"));
+	useFrame = (useFrameStr == null || !useFrameStr.equalsIgnoreCase("false"));
+	if (useFrame)
+	    main = this;
+	else
+	    main = applet;
+	
+	String os = System.getProperty("os.name");
+	isMac = (os.indexOf("Mac ") == 0);
+	ctrlMetaKey = (isMac) ? "\u2318" : "Ctrl";
+	String jv = System.getProperty("java.class.version");
+	double jvf = new Double(jv).doubleValue();
+	if (jvf >= 48) {
+	    muString = "\u03bc";
+	    ohmString = "\u03a9";
+	    useBufferedImage = true;
+	}
+	
+	dumpTypes = new Class[300];
+	shortcuts = new Class[127];
+
+	// these characters are reserved
+	dumpTypes[(int)'o'] = Scope.class;
+	dumpTypes[(int)'h'] = Scope.class;
+	dumpTypes[(int)'$'] = Scope.class;
+	dumpTypes[(int)'%'] = Scope.class;
+	dumpTypes[(int)'?'] = Scope.class;
+	dumpTypes[(int)'B'] = Scope.class;
+
+	main.setLayout(new CircuitLayout());
+	cv = new CircuitCanvas(this);
+	cv.addComponentListener(this);
+	cv.addMouseMotionListener(this);
+	cv.addMouseListener(this);
+	cv.addKeyListener(this);
+	main.add(cv);
+
+	mainMenu = new PopupMenu();
+	MenuBar mb = null;
+	if (useFrame)
+	    mb = new MenuBar();
+	Menu m = new Menu("File");
+	if (useFrame)
+	    mb.add(m);
+	else
+	    mainMenu.add(m);
+	m.add(importItem = getMenuItem("Import"));
+	m.add(exportItem = getMenuItem("Export"));
+//	m.add(exportLinkItem = getMenuItem("Export Link"));
+	m.addSeparator();
+	m.add(exitItem   = getMenuItem("Exit"));
+
+	m = new Menu("Edit");
+	m.add(undoItem = getMenuItem("Undo"));
+	undoItem.setShortcut(new MenuShortcut(KeyEvent.VK_Z));
+	m.add(redoItem = getMenuItem("Redo"));
+	redoItem.setShortcut(new MenuShortcut(KeyEvent.VK_Z, true));
+	m.addSeparator();
+	m.add(cutItem = getMenuItem("Cut"));
+	cutItem.setShortcut(new MenuShortcut(KeyEvent.VK_X));
+	m.add(copyItem = getMenuItem("Copy"));
+	copyItem.setShortcut(new MenuShortcut(KeyEvent.VK_C));
+	m.add(pasteItem = getMenuItem("Paste"));
+	pasteItem.setShortcut(new MenuShortcut(KeyEvent.VK_V));
+	pasteItem.setEnabled(false);
+	m.add(selectAllItem = getMenuItem("Select All"));
+	selectAllItem.setShortcut(new MenuShortcut(KeyEvent.VK_A));
+	if (useFrame)
+	    mb.add(m);
+	else
+	    mainMenu.add(m);
+
+	m = new Menu("Scope");
+	if (useFrame)
+	    mb.add(m);
+	else
+	    mainMenu.add(m);
+	m.add(getMenuItem("Stack All", "stackAll"));
+	m.add(getMenuItem("Unstack All", "unstackAll"));
+
+	optionsMenu = m = new Menu("Options");
+	if (useFrame)
+	    mb.add(m);
+	else
+	    mainMenu.add(m);
+	m.add(dotsCheckItem = getCheckItem("Show Current"));
+	dotsCheckItem.setState(false); // hausen: changed from true to false
+	m.add(voltsCheckItem = getCheckItem("Show Voltage"));
+	voltsCheckItem.setState(true);
+	m.add(powerCheckItem = getCheckItem("Show Power"));
+	m.add(showValuesCheckItem = getCheckItem("Show Values"));
+	showValuesCheckItem.setState(true);
+	//m.add(conductanceCheckItem = getCheckItem("Show Conductance"));
+	m.add(smallGridCheckItem = getCheckItem("Small Grid"));
+	m.add(euroResistorCheckItem = getCheckItem("European Resistors"));
+	euroResistorCheckItem.setState(euro);
+	m.add(printableCheckItem = getCheckItem("White Background"));
+	printableCheckItem.setState(printable);
+	m.add(conventionCheckItem = getCheckItem("Conventional Current Motion"));
+	conventionCheckItem.setState(convention);
+	m.add(idealWireCheckItem = getCheckItem("Ideal Wires"));
+	idealWireCheckItem.setState(WireElm.ideal);
+	idealWireCheckItem.addItemListener(
+		new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					WireElm.ideal = true;
+				} else {
+					WireElm.ideal = false;
+				}
+				System.err.println("ideal wires: " + WireElm.ideal);
+			}
+		}
+	);
+
+	m.add(optionsItem = getMenuItem("Other Options..."));
+	
+	Menu circuitsMenu = new Menu("Circuits");
+	if (useFrame)
+	    mb.add(circuitsMenu);
+	else
+	    mainMenu.add(circuitsMenu);
+
+	mainMenu.add(getClassCheckItem("Add Wire", "WireElm"));
+	mainMenu.add(getClassCheckItem("Add Resistor", "ResistorElm"));
+	
+	Menu passMenu = new Menu("Passive Components");
+	mainMenu.add(passMenu);
+	passMenu.add(getClassCheckItem("Add Capacitor", "CapacitorElm"));
+	passMenu.add(getClassCheckItem("Add Inductor", "InductorElm"));
+	passMenu.add(getClassCheckItem("Add Switch", "SwitchElm"));
+	passMenu.add(getClassCheckItem("Add Push Switch", "PushSwitchElm"));
+	passMenu.add(getClassCheckItem("Add SPDT Switch", "Switch2Elm"));
+	passMenu.add(getClassCheckItem("Add Potentiometer", "PotElm"));
+	passMenu.add(getClassCheckItem("Add Transformer", "TransformerElm"));
+	passMenu.add(getClassCheckItem("Add Tapped Transformer",
+				       "TappedTransformerElm"));
+	passMenu.add(getClassCheckItem("Add Transmission Line", "TransLineElm"));
+	passMenu.add(getClassCheckItem("Add Relay", "RelayElm"));
+	passMenu.add(getClassCheckItem("Add Memristor", "MemristorElm"));
+	passMenu.add(getClassCheckItem("Add Spark Gap", "SparkGapElm"));
+	
+	Menu inputMenu = new Menu("Inputs/Outputs");
+	mainMenu.add(inputMenu);
+	inputMenu.add(getClassCheckItem("Add Ground", "GroundElm"));
+	inputMenu.add(getClassCheckItem("Add Voltage Source (2-terminal)", "DCVoltageElm"));
+	inputMenu.add(getClassCheckItem("Add A/C Source (2-terminal)", "ACVoltageElm"));
+	inputMenu.add(getClassCheckItem("Add Voltage Source (1-terminal)", "RailElm"));
+	inputMenu.add(getClassCheckItem("Add A/C Source (1-terminal)", "ACRailElm"));
+	inputMenu.add(getClassCheckItem("Add Square Wave (1-terminal)", "SquareRailElm"));
+	inputMenu.add(getClassCheckItem("Add Analog Output", "OutputElm"));
+	inputMenu.add(getClassCheckItem("Add Logic Input", "LogicInputElm"));
+	inputMenu.add(getClassCheckItem("Add Logic Output", "LogicOutputElm"));
+	inputMenu.add(getClassCheckItem("Add Clock", "ClockElm"));
+	inputMenu.add(getClassCheckItem("Add A/C Sweep", "SweepElm"));
+	inputMenu.add(getClassCheckItem("Add Var. Voltage", "VarRailElm"));
+	inputMenu.add(getClassCheckItem("Add Antenna", "AntennaElm"));
+	inputMenu.add(getClassCheckItem("Add Current Source", "CurrentElm"));
+	inputMenu.add(getClassCheckItem("Add LED", "LEDElm"));
+	inputMenu.add(getClassCheckItem("Add Lamp (beta)", "LampElm"));
+	
+	Menu activeMenu = new Menu("Active Components");
+	mainMenu.add(activeMenu);
+	activeMenu.add(getClassCheckItem("Add Diode", "DiodeElm"));
+	activeMenu.add(getClassCheckItem("Add Zener Diode", "ZenerElm"));
+	activeMenu.add(getClassCheckItem("Add Transistor (bipolar, NPN)",
+				    "NTransistorElm"));
+	activeMenu.add(getClassCheckItem("Add Transistor (bipolar, PNP)",
+				    "PTransistorElm"));
+	activeMenu.add(getClassCheckItem("Add Op Amp (- on top)", "OpAmpElm"));
+	activeMenu.add(getClassCheckItem("Add Op Amp (+ on top)",
+				    "OpAmpSwapElm"));
+	activeMenu.add(getClassCheckItem("Add MOSFET (n-channel)",
+				    "NMosfetElm"));
+	activeMenu.add(getClassCheckItem("Add MOSFET (p-channel)",
+				    "PMosfetElm"));
+	activeMenu.add(getClassCheckItem("Add JFET (n-channel)",
+					 "NJfetElm"));
+	activeMenu.add(getClassCheckItem("Add JFET (p-channel)",
+					 "PJfetElm"));
+	activeMenu.add(getClassCheckItem("Add Analog Switch (SPST)", "AnalogSwitchElm"));
+	activeMenu.add(getClassCheckItem("Add Analog Switch (SPDT)", "AnalogSwitch2Elm"));
+	activeMenu.add(getClassCheckItem("Add SCR", "SCRElm"));
+	//activeMenu.add(getClassCheckItem("Add Varactor/Varicap", "VaractorElm"));
+	activeMenu.add(getClassCheckItem("Add Tunnel Diode", "TunnelDiodeElm"));
+	activeMenu.add(getClassCheckItem("Add Triode", "TriodeElm"));
+	//activeMenu.add(getClassCheckItem("Add Diac", "DiacElm"));
+	//activeMenu.add(getClassCheckItem("Add Triac", "TriacElm"));
+	//activeMenu.add(getClassCheckItem("Add Photoresistor", "PhotoResistorElm"));
+	//activeMenu.add(getClassCheckItem("Add Thermistor", "ThermistorElm"));
+	activeMenu.add(getClassCheckItem("Add CCII+", "CC2Elm"));
+	activeMenu.add(getClassCheckItem("Add CCII-", "CC2NegElm"));
+
+	Menu gateMenu = new Menu("Logic Gates");
+	mainMenu.add(gateMenu);
+	gateMenu.add(getClassCheckItem("Add Inverter", "InverterElm"));
+	gateMenu.add(getClassCheckItem("Add NAND Gate", "NandGateElm"));
+	gateMenu.add(getClassCheckItem("Add NOR Gate", "NorGateElm"));
+	gateMenu.add(getClassCheckItem("Add AND Gate", "AndGateElm"));
+	gateMenu.add(getClassCheckItem("Add OR Gate", "OrGateElm"));
+	gateMenu.add(getClassCheckItem("Add XOR Gate", "XorGateElm"));
+
+	Menu chipMenu = new Menu("Chips");
+	mainMenu.add(chipMenu);
+	chipMenu.add(getClassCheckItem("Add D Flip-Flop", "DFlipFlopElm"));
+	chipMenu.add(getClassCheckItem("Add JK Flip-Flop", "JKFlipFlopElm"));
+	chipMenu.add(getClassCheckItem("Add 7 Segment LED", "SevenSegElm"));
+	chipMenu.add(getClassCheckItem("Add VCO", "VCOElm"));
+	chipMenu.add(getClassCheckItem("Add Phase Comparator", "PhaseCompElm"));
+	chipMenu.add(getClassCheckItem("Add Counter", "CounterElm"));
+	chipMenu.add(getClassCheckItem("Add Decade Counter", "DecadeElm"));
+	chipMenu.add(getClassCheckItem("Add 555 Timer", "TimerElm"));
+	chipMenu.add(getClassCheckItem("Add DAC", "DACElm"));
+	chipMenu.add(getClassCheckItem("Add ADC", "ADCElm"));
+	chipMenu.add(getClassCheckItem("Add Latch", "LatchElm"));
+	
+	Menu otherMenu = new Menu("Other");
+	mainMenu.add(otherMenu);
+	otherMenu.add(getClassCheckItem("Add Text", "TextElm"));
+	otherMenu.add(getClassCheckItem("Add Box", "BoxElm"));
+	otherMenu.add(getClassCheckItem("Add Scope Probe", "ProbeElm"));
+	otherMenu.add(getCheckItem("Drag All (Alt-drag)", "DragAll"));
+	otherMenu.add(getCheckItem(
+			  isMac ? "Drag Row (Alt-S-drag, S-right)" :
+			  "Drag Row (S-right)",
+			  "DragRow"));
+	otherMenu.add(getCheckItem(
+			  isMac ? "Drag Column (Alt-\u2318-drag, \u2318-right)" :
+			  "Drag Column (C-right)",
+			  "DragColumn"));
+	otherMenu.add(getCheckItem("Drag Selected", "DragSelected"));
+	otherMenu.add(getCheckItem("Drag Post (" + ctrlMetaKey + "-drag)",
+				   "DragPost"));
+
+	mainMenu.add(getCheckItem("Select/Drag Selected (space or Shift-drag)", "Select"));
+	main.add(mainMenu);
+
+	main.add(resetButton = new Button("Reset"));
+	resetButton.addActionListener(this);
+	dumpMatrixButton = new Button("Dump Matrix");
+	//main.add(dumpMatrixButton);
+	dumpMatrixButton.addActionListener(this);
+	stoppedCheck = new Checkbox("Stopped");
+	stoppedCheck.addItemListener(this);
+	main.add(stoppedCheck);
+	
+	main.add(new Label("Simulation Speed", Label.CENTER));
+
+	// was max of 140
+	main.add(speedBar = new Scrollbar(Scrollbar.HORIZONTAL, 3, 1, 0, 260));
+	speedBar.addAdjustmentListener(this);
+
+	main.add(new Label("Current Speed", Label.CENTER));
+	currentBar = new Scrollbar(Scrollbar.HORIZONTAL,
+				   50, 1, 1, 100);
+	currentBar.addAdjustmentListener(this);
+	main.add(currentBar);
+
+	main.add(powerLabel = new Label("Power Brightness", Label.CENTER));
+	main.add(powerBar = new Scrollbar(Scrollbar.HORIZONTAL,
+				    50, 1, 1, 100));
+	powerBar.addAdjustmentListener(this);
+	powerBar.disable();
+	powerLabel.disable();
+
+	main.add(new Label("www.falstad.com"));
+
+	if (useFrame)
+	    main.add(new Label(""));
+	Font f = new Font("SansSerif", 0, 10);
+	Label l;
+	l = new Label("Current Circuit:");
+	l.setFont(f);
+	titleLabel = new Label("Label");
+	titleLabel.setFont(f);
+	if (useFrame) {
+	    main.add(l);
+	    main.add(titleLabel);
+	}
+
+	setGrid();
+	elmList = new Vector<CircuitElm>();
+//	setupList = new Vector();
+	undoStack = new Vector<String>();
+	redoStack = new Vector<String>();
+
+	scopes = new Scope[20];
+	scopeColCount = new int[20];
+	scopeCount = 0;
+	
+	random = new Random();
+	cv.setBackground(Color.black);
+	cv.setForeground(Color.lightGray);
+	
+	elmMenu = new PopupMenu();
+	elmMenu.add(elmEditMenuItem = getMenuItem("Edit"));
+	elmMenu.add(elmScopeMenuItem = getMenuItem("View in Scope"));
+	elmMenu.add(elmCutMenuItem = getMenuItem("Cut"));
+	elmMenu.add(elmCopyMenuItem = getMenuItem("Copy"));
+	elmMenu.add(elmDeleteMenuItem = getMenuItem("Delete"));
+	main.add(elmMenu);
+	
+	scopeMenu = buildScopeMenu(false);
+	transScopeMenu = buildScopeMenu(true);
+
+	getSetupList(circuitsMenu, false);
+	if (useFrame)
+	    setMenuBar(mb);
+	if (startCircuitText != null)
+	    readSetup(startCircuitText);
+	else if (stopMessage == null && startCircuit != null)
+	    readSetupFile(startCircuit, startLabel);
+	else
+	    readSetup(null, 0, false);
+
+	if (useFrame) {
+	    Dimension screen = getToolkit().getScreenSize();
+	    resize(860, 640);
+	    handleResize();
+	    Dimension x = getSize();
+	    setLocation((screen.width  - x.width)/2,
+			(screen.height - x.height)/2);
+	    show();
+	} else {
+	    if (!powerCheckItem.getState()) {
+		main.remove(powerBar);
+		main.remove(powerLabel);
+		main.validate();
+	    }
+	    hide();
+	    handleResize();
+	    applet.validate();
+	}
+	requestFocus();
+
+	addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent we)
+			{
+				destroyFrame();
+>>>>>>> 6d38bc2409a5e0add33b65a08d0f44e3f50cc75e
 			}
 		}
 		titleLabel.setText(title);
