@@ -3,7 +3,7 @@ import java.util.StringTokenizer;
 
     class WireElm extends ResistorElm {
 	public static boolean ideal = false;
-	private static final double defaultResistance = 1E-12;
+	private static final double defaultResistance = 1E-06;
 	public WireElm(int xx, int yy) { super(xx, yy); resistance = defaultResistance; }
 	public WireElm(int xa, int ya, int xb, int yb, int f,
 		    StringTokenizer st) {
