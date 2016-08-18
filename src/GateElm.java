@@ -102,7 +102,6 @@ import java.util.StringTokenizer;
 	}
 	abstract boolean calcFunction();
 	void doStep() {
-	    int i;
 	    boolean f = calcFunction();
 	    if (isInverting())
 		f = !f;

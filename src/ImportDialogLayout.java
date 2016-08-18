@@ -1,7 +1,7 @@
 import java.awt.*;
 
-class ImportExportDialogLayout implements LayoutManager {
-	public ImportExportDialogLayout() {
+class ImportDialogLayout implements LayoutManager {
+	public ImportDialogLayout() {
 	}
 
 	public void addLayoutComponent(String name, Component c) {

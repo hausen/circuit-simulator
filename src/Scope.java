@@ -192,7 +192,7 @@ class Scope {
 	    dpixels[i] *= .997;
 	}
 	g.drawImage(image, rect.x, rect.y, null);
-	g.setColor(elm.whiteColor);
+	g.setColor(CircuitElm.whiteColor);
 	g.fillOval(rect.x+draw_ox-2, rect.y+draw_oy-2, 5, 5);
 	int yt = rect.y+10;
 	int x = rect.x;
@@ -276,7 +276,7 @@ class Scope {
 	    gridStep *= 10;
 	double tstart = sim.t-sim.timeStep*speed*rect.width;
 	double tx = sim.t-(sim.t % gridStep);
-	int first = 1;
+	//int first = 1; 	#unused
 	for (ll = 0; ; ll++) {
 	    double tl = tx-gridStep*ll;
 	    int gx = (int) ((tl-tstart)/ts);
@@ -287,7 +287,7 @@ class Scope {
 	    if (tl < 0)
 		continue;
 	    col = 0xFF202020;
-	    first = 0;
+	    //first = 0;	#unused
 	    if (((tl+gridStep/4) % (gridStep*10)) < gridStep) {
 		col = 0xFF909090;
 		if (((tl+gridStep/4) % (gridStep*100)) < gridStep)
@@ -415,37 +415,37 @@ class Scope {
 	    // System.out.println(freq + " " + periodstd + " " + periodct);
 	}
 	g.drawImage(image, rect.x, rect.y, null);
-	g.setColor(elm.whiteColor);
+	g.setColor(CircuitElm.whiteColor);
 	int yt = rect.y+10;
 	x += rect.x;
 	if (showMax) {
 	    if (value != 0)
-		g.drawString(elm.getUnitText(realMaxV,
+		g.drawString(CircuitElm.getUnitText(realMaxV,
 					 elm.getScopeUnits(value)),
 			     x, yt);
 	    else if (showV)
-		g.drawString(elm.getVoltageText(realMaxV), x, yt);
+		g.drawString(CircuitElm.getVoltageText(realMaxV), x, yt);
 	    else if (showI)
-		g.drawString(elm.getCurrentText(realMaxI), x, yt);
+		g.drawString(CircuitElm.getCurrentText(realMaxI), x, yt);
 	    yt += 15;
 	}
 	if (showMin) {
 	    int ym = rect.y+rect.height-5;
 	    if (value != 0)
-		g.drawString(elm.getUnitText(realMinV,
+		g.drawString(CircuitElm.getUnitText(realMinV,
 					 elm.getScopeUnits(value)),
 			     x, ym);
 	    else if (showV)
-		g.drawString(elm.getVoltageText(realMinV), x, ym);
+		g.drawString(CircuitElm.getVoltageText(realMinV), x, ym);
 	    else if (showI)
-		g.drawString(elm.getCurrentText(realMinI), x, ym);
+		g.drawString(CircuitElm.getCurrentText(realMinI), x, ym);
 	}
 	if (text != null && rect.y + rect.height > yt+5) {
 	    g.drawString(text, x, yt);
 	    yt += 15;
 	}
 	if (showFreq && freq != 0 && rect.y + rect.height > yt+5)
-	    g.drawString(elm.getUnitText(freq, "Hz"), x, yt);
+	    g.drawString(CircuitElm.getUnitText(freq, "Hz"), x, yt);
 	if (ptr > 5 && !lockScale) {
 	    if (!gotI && minMaxI > 1e-4)
 		minMaxI /= 2;
@@ -571,10 +571,10 @@ class Scope {
 		   DataBufferInt dbi = (DataBufferInt) db;
 		   pixels = dbi.getData();
 		*/
-		Class biclass = Class.forName("java.awt.image.BufferedImage");
-		Class dbiclass = Class.forName("java.awt.image.DataBufferInt");
-		Class rasclass = Class.forName("java.awt.image.Raster");
-		Constructor cstr = biclass.getConstructor(
+		Class<?> biclass = Class.forName("java.awt.image.BufferedImage");
+		Class<?> dbiclass = Class.forName("java.awt.image.DataBufferInt");
+		Class<?> rasclass = Class.forName("java.awt.image.Raster");
+		Constructor<?> cstr = biclass.getConstructor(
 		    new Class[] { int.class, int.class, int.class });
 		image = (Image) cstr.newInstance(new Object[] {
 						     new Integer(w), new Integer(h),

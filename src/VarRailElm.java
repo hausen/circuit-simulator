@@ -25,18 +25,18 @@ import java.util.StringTokenizer;
 	int getDumpType() { return 172; }
 	void createSlider() {
 	    waveform = WF_VAR;
-	    sim.main.add(label = new Label(sliderText, Label.CENTER));
+	    CirSim.main.add(label = new Label(sliderText, Label.CENTER));
 	    int value = (int) ((frequency-bias)*100/(maxVoltage-bias));
-	    sim.main.add(slider = new Scrollbar(Scrollbar.HORIZONTAL, value, 1, 0, 101));
-	    sim.main.validate();
+	    CirSim.main.add(slider = new Scrollbar(Scrollbar.HORIZONTAL, value, 1, 0, 101));
+	    CirSim.main.validate();
 	}
 	double getVoltage() {
 	    frequency = slider.getValue() * (maxVoltage-bias) / 100. + bias;
 	    return frequency;
 	}
 	void delete() {
-	    sim.main.remove(label);
-	    sim.main.remove(slider);
+	    CirSim.main.remove(label);
+	    CirSim.main.remove(slider);
 	}
 	public EditInfo getEditInfo(int n) {
 	    if (n == 0)

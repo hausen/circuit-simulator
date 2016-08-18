@@ -41,9 +41,9 @@ class DiacElm extends CircuitElm {
     
     void draw(Graphics g) {
 	// FIXME need to draw Diac
-	int i;
-	double v1 = volts[0];
-	double v2 = volts[1];
+	//int i;	#unused
+	//double v1 = volts[0];
+	//double v2 = volts[1];
 	setBbox(point1, point2, 6);
 	draw2Leads(g);
 	setPowerColor(g, true);
@@ -79,8 +79,8 @@ class DiacElm extends CircuitElm {
 	arr[0] = "spark gap";
 	getBasicInfo(arr);
 	arr[3] = state ? "on" : "off";
-	arr[4] = "Ron = " + getUnitText(onresistance, sim.ohmString);
-	arr[5] = "Roff = " + getUnitText(offresistance, sim.ohmString);
+	arr[4] = "Ron = " + getUnitText(onresistance, CirSim.ohmString);
+	arr[5] = "Roff = " + getUnitText(offresistance, CirSim.ohmString);
 	arr[6] = "Vbrkdn = " + getUnitText(breakdown, "V");
 	arr[7] = "Ihold = " + getUnitText(holdcurrent, "A");
     }

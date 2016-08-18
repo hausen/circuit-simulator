@@ -136,7 +136,7 @@ import java.util.StringTokenizer;
 	double lastvbc, lastvbe;
 	double limitStep(double vnew, double vold) {
 	    double arg;
-	    double oo = vnew;
+	    //double oo = vnew;	#unused
 	    
 	    if (vnew > vcrit && Math.abs(vnew - vold) > (vt + vt)) {
 		if(vold > 0) {

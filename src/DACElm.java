@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.util.StringTokenizer;
 
 class DACElm extends ChipElm {

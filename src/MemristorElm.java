@@ -95,14 +95,14 @@ class MemristorElm extends CircuitElm {
     void getInfo(String arr[]) {
 	arr[0] = "memristor";
 	getBasicInfo(arr);
-	arr[3] = "R = " + getUnitText(resistance, sim.ohmString);
+	arr[3] = "R = " + getUnitText(resistance, CirSim.ohmString);
 	arr[4] = "P = " + getUnitText(getPower(), "W");
     }
     double getScopeValue(int x) {
 	return (x == 2) ? resistance : (x == 1) ? getPower() : getVoltageDiff();
     }
     String getScopeUnits(int x) {
-	return (x == 2) ? sim.ohmString : (x == 1) ? "W" : "V";
+	return (x == 2) ? CirSim.ohmString : (x == 1) ? "W" : "V";
     }
     public EditInfo getEditInfo(int n) {
 	if (n == 0)

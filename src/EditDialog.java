@@ -9,7 +9,11 @@ interface Editable {
 }
 
 class EditDialog extends Dialog implements AdjustmentListener, ActionListener, ItemListener {
-    Editable elm;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7331690065682090932L;
+	Editable elm;
     CirSim cframe;
     Button applyButton, okButton;
     EditInfo einfos[];
@@ -58,7 +62,7 @@ class EditDialog extends Dialog implements AdjustmentListener, ActionListener, I
 	applyButton.addActionListener(this);
 	add(okButton = new Button("OK"));
 	okButton.addActionListener(this);
-	Point x = cframe.main.getLocationOnScreen();
+	Point x = CirSim.main.getLocationOnScreen();
 	Dimension d = getSize();
 	setLocation(x.x + (cframe.winSize.width-d.width)/2,
 		    x.y + (cframe.winSize.height-d.height)/2);
@@ -202,8 +206,8 @@ class EditDialog extends Dialog implements AdjustmentListener, ActionListener, I
 	}
 	if (changed) {
 	    setVisible(false);
-	    cframe.editDialog = new EditDialog(elm, cframe);
-	    cframe.editDialog.show();
+	    CirSim.editDialog = new EditDialog(elm, cframe);
+	    CirSim.editDialog.setVisible(true);
 	}
     }
 	
@@ -222,9 +226,9 @@ class EditDialog extends Dialog implements AdjustmentListener, ActionListener, I
 
     protected void closeDialog()
     {
-	cframe.main.requestFocus();
+	CirSim.main.requestFocus();
 	setVisible(false);
-	cframe.editDialog = null;
+	CirSim.editDialog = null;
     }
 }
 

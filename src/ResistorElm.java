@@ -83,7 +83,7 @@ import java.util.StringTokenizer;
 	void getInfo(String arr[]) {
 	    arr[0] = "resistor";
 	    getBasicInfo(arr);
-	    arr[3] = "R = " + getUnitText(resistance, sim.ohmString);
+	    arr[3] = "R = " + getUnitText(resistance, CirSim.ohmString);
 	    arr[4] = "P = " + getUnitText(getPower(), "W");
 	}
 	public EditInfo getEditInfo(int n) {

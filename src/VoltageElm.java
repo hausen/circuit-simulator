@@ -263,10 +263,11 @@ class VoltageElm extends CircuitElm {
 	    double oldfreq = frequency;
 	    frequency = ei.value;
 	    double maxfreq = 1/(8*sim.timeStep);
-	    if (frequency > maxfreq)
-		frequency = maxfreq;
-	    double adj = frequency-oldfreq;
-	    freqTimeZero = sim.t-oldfreq*(sim.t-freqTimeZero)/frequency;
+	    if (frequency > maxfreq){
+	    	frequency = maxfreq;
+	    	//double adj = frequency-oldfreq;
+	    	freqTimeZero = sim.t-oldfreq*(sim.t-freqTimeZero)/frequency;
+	    }
 	}
 	if (n == 1) {
 	    int ow = waveform;

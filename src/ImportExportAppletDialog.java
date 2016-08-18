@@ -1,13 +1,20 @@
 import java.awt.Dialog;
-import java.applet.Applet;
-import java.awt.Frame;
 import netscape.javascript.*; // add plugin.jar to classpath during compilation
+
+/*
+import java.applet.Applet;	#unused imports
+import java.awt.Frame;
+*/
 
 class ImportExportAppletDialog
 extends Dialog
 implements ImportExportDialog
 {
-    Action type;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7610750057068682518L;
+	Action type;
     CirSim cframe;
     String circuitDump;
 
